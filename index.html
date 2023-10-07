@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三角函数和反三角函数计算器</title>
+</head>
+<body>
+    <h1>三角函数和反三角函数计算器</h1>
+    
+    <h2>三角函数计算</h2>
+    <label for="inputNumber">输入一个数值：</label>
+    <input type="number" id="inputNumber">
+    <button onclick="calculateTrigFunctions()">计算三角函数</button>
+    <p id="trigResult"></p>
+
+    <h2>反三角函数计算</h2>
+    <label for="trigFunction">选择反三角函数：</label>
+    <select id="trigFunction">
+        <option value="asin">反正弦（asin）</option>
+        <option value="acos">反余弦（acos）</option>
+        <option value="atan">反正切（atan）</option>
+    </select>
+    <label for="trigInput">输入一个值：</label>
+    <input type="number" id="trigInput">
+    <button onclick="calculateInverseTrigFunction()">计算反三角函数</button>
+    <p id="inverseTrigResult"></p>
+
+    <script>
+        // 内嵌JavaScript代码
+        function calculateTrigFunctions() {
+            // 获取用户输入的数值
+            const inputNumber = parseFloat(document.getElementById('inputNumber').value);
+
+            // 乘以圆周率（π）
+            const inputTimesPi = inputNumber;
+
+            // 计算正弦、余弦和正切函数值
+            const sinValue = Math.sin(inputTimesPi);
+            const cosValue = Math.cos(inputTimesPi);
+            const tanValue = Math.tan(inputTimesPi);
+
+            // 显示三角函数结果
+            const trigResultElement = document.getElementById('trigResult');
+            trigResultElement.innerHTML = `
+                正弦(${inputTimesPi}) = ${sinValue.toFixed(4)}<br>
+                余弦(${inputTimesPi}) = ${cosValue.toFixed(4)}<br>
+                正切(${inputTimesPi}) = ${tanValue.toFixed(4)}
+            `;
+        }
+
+        function calculateInverseTrigFunction() {
+            // 获取用户选择的反三角函数
+            const selectedFunction = document.getElementById('trigFunction').value;
+
+            // 获取用户输入的值
+            const inputValue = parseFloat(document.getElementById('trigInput').value);
+
+            // 初始化反三角函数结果
+            let result;
+
+            // 根据用户选择计算相应的反三角函数
+            switch (selectedFunction) {
+                case 'asin':
+                    result = Math.asin(inputValue);
+                    break;
+                case 'acos':
+                    result = Math.acos(inputValue);
+                    break;
+                case 'atan':
+                    result = Math.atan(inputValue);
+                    break;
+                default:
+                    result = '请选择反三角函数';
+            }
+
+            // 显示反三角函数结果
+            const inverseTrigResultElement = document.getElementById('inverseTrigResult');
+            inverseTrigResultElement.innerHTML = `
+                ${selectedFunction}(${inputValue}) = ${result.toFixed(4)}
+            `;
+        }
+    </script>
+</body>
+</html>
